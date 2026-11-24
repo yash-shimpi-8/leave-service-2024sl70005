@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/yash8shimpi/leave-service.git'
+                    url: 'https://github.com/yash-shimpi-8/leave-service-2024SL70005.git'
             }
         }
         stage('Build and Test') {
