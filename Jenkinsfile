@@ -30,5 +30,23 @@ pipeline {
                 """
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t leave-service-2024sl70005:1.0 .'
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                sh '''
+                    docker stop leave-service-staging || true
+                    docker rm   leave-service-staging || true
+                    docker run -d \
+                        --name leave-service-staging \
+                        -e APP_ENV=staging \
+                        -p 8085:8080 \
+                        leave-service-2024sl70005:1.0
+                '''
+            }
+        }
     }
 }
